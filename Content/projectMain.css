@@ -1,0 +1,12 @@
+﻿
+
+
+.card-header-custom-primary {
+    background-color: darkblue;
+    border-bottom: 1px solid;
+    padding: .75rem 1.25rem; 
+    position: relative;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color:white;
+}

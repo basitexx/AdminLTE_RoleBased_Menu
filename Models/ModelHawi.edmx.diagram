@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b167b32ab96b46eea753caeac99d4b6d" Name="Diagram1">
+        <EntityTypeShape EntityType="hawic_dbModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Appointment" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Department" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_ImagingOrder" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_InjectionOrder" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_LaboratoryOrder" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_OrderStatus" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Patient" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_PatientHistory" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_PatientHistoryOrders" Width="1.5" PointX="10.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Prescription" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Staff" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_SubCity" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Visit" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hawic_dbModel.tbl_Woreda" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Appointment_tbl_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Appointment_tbl_StaffPatient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_ImagingOrder_tbl_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_ImagingOrder_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_ImagingOrder_tbl_StaffDoctor" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_ImagingOrder_tbl_StaffImaging" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_InjectionOrder_tbl_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_InjectionOrder_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_InjectionOrder_tbl_StaffDoctor" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_InjectionOrder_tbl_StaffNurse" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_LaboratoryOrder_tbl_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_LaboratoryOrder_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_LaboratoryOrder_tbl_StaffDoctor" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_LaboratoryOrder_tbl_StaffLaboratory" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_PatientHistory_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Prescription_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Visit_tbl_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_PatientHistory_tbl_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_PatientHistory_tbl_Visit" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_PatientHistoryOrders_tbl_PatientHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Prescription_tbl_StaffDoctor" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Staff_tbl_SubCity" ManuallyRouted="false" />
+        <AssociationConnector Association="hawic_dbModel.FK_tbl_Woreda_tbl_SubCity" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

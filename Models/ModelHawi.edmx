@@ -1,0 +1,1451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="hawic_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Appointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="AppointmentDate" Type="date" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="tbl_ImagingOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="ImagingID" Type="int" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="ImageResult" Type="image" />
+          <Property Name="OrderStatus" Type="int" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_InjectionOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="NurseID" Type="int" />
+          <Property Name="Description" Type="int" />
+          <Property Name="OrderStatus" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_LaboratoryOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="LaboratoryID" Type="int" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="OrderStatus" Type="int" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="50" />
+          <Property Name="SubCity" Type="int" />
+          <Property Name="Woreda" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_PatientHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="VisitID" Type="int" />
+          <Property Name="DoctorComment" Type="nvarchar(max)" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_PatientHistoryOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientHistoryID" Type="int" />
+          <Property Name="LaboratoryOrderID" Type="int" />
+          <Property Name="ImagingOrderID" Type="int" />
+          <Property Name="InjectionOrderID" Type="int" />
+          <Property Name="PrescriptionOrderID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Prescription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prescription" Type="nvarchar(max)" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="50" />
+          <Property Name="SubCity" Type="int" />
+          <Property Name="Woreda" Type="varchar" MaxLength="50" />
+          <Property Name="AccountID" Type="nvarchar" MaxLength="450" />
+          <Property Name="RegisterDate" Type="datetime" />
+          <Property Name="RegStatus" Type="int" />
+          <Property Name="Department" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_SubCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubCity" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Visit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="VisitDate" Type="datetime" />
+          <Property Name="VisitType" Type="int" />
+          <Property Name="VisitStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Woreda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Woreda" Type="varchar(max)" />
+          <Property Name="SubCityID" Type="int" />
+        </EntityType>
+        <Association Name="FK_tbl_Appointment_tbl_Staff">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Appointment">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Appointment_tbl_StaffPatient">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Appointment">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_StaffImaging">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="ImagingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_StaffNurse">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="NurseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_StaffLaboratory">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="LaboratoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Staff">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Visit">
+          <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Visit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="VisitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistoryOrders_tbl_PatientHistory">
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistoryOrders" Type="Self.tbl_PatientHistoryOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistoryOrders">
+              <PropertyRef Name="PatientHistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Prescription_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_Prescription" Type="Self.tbl_Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Prescription">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Prescription_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Prescription" Type="Self.tbl_Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Prescription">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Staff_tbl_SubCity">
+          <End Role="tbl_SubCity" Type="Self.tbl_SubCity" Multiplicity="0..1" />
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SubCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Staff">
+              <PropertyRef Name="SubCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Visit_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Visit">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Woreda_tbl_SubCity">
+          <End Role="tbl_SubCity" Type="Self.tbl_SubCity" Multiplicity="0..1" />
+          <End Role="tbl_Woreda" Type="Self.tbl_Woreda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SubCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Woreda">
+              <PropertyRef Name="SubCityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="hawic_dbModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Appointment" EntityType="Self.tbl_Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Department" EntityType="Self.tbl_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ImagingOrder" EntityType="Self.tbl_ImagingOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_InjectionOrder" EntityType="Self.tbl_InjectionOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_LaboratoryOrder" EntityType="Self.tbl_LaboratoryOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderStatus" EntityType="Self.tbl_OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PatientHistory" EntityType="Self.tbl_PatientHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PatientHistoryOrders" EntityType="Self.tbl_PatientHistoryOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Prescription" EntityType="Self.tbl_Prescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Staff" EntityType="Self.tbl_Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SubCity" EntityType="Self.tbl_SubCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Visit" EntityType="Self.tbl_Visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Woreda" EntityType="Self.tbl_Woreda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Appointment_tbl_Staff" Association="Self.FK_tbl_Appointment_tbl_Staff">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Appointment_tbl_StaffPatient" Association="Self.FK_tbl_Appointment_tbl_StaffPatient">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_OrderStatus" Association="Self.FK_tbl_ImagingOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_Patient" Association="Self.FK_tbl_ImagingOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_StaffDoctor" Association="Self.FK_tbl_ImagingOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_StaffImaging" Association="Self.FK_tbl_ImagingOrder_tbl_StaffImaging">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_OrderStatus" Association="Self.FK_tbl_InjectionOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_Patient" Association="Self.FK_tbl_InjectionOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_StaffDoctor" Association="Self.FK_tbl_InjectionOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_StaffNurse" Association="Self.FK_tbl_InjectionOrder_tbl_StaffNurse">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_OrderStatus" Association="Self.FK_tbl_LaboratoryOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_Patient" Association="Self.FK_tbl_LaboratoryOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_StaffDoctor" Association="Self.FK_tbl_LaboratoryOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_StaffLaboratory" Association="Self.FK_tbl_LaboratoryOrder_tbl_StaffLaboratory">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Patient" Association="Self.FK_tbl_PatientHistory_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Staff" Association="Self.FK_tbl_PatientHistory_tbl_Staff">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Visit" Association="Self.FK_tbl_PatientHistory_tbl_Visit">
+            <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistoryOrders_tbl_PatientHistory" Association="Self.FK_tbl_PatientHistoryOrders_tbl_PatientHistory">
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+            <End Role="tbl_PatientHistoryOrders" EntitySet="tbl_PatientHistoryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Prescription_tbl_Patient" Association="Self.FK_tbl_Prescription_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_Prescription" EntitySet="tbl_Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Prescription_tbl_StaffDoctor" Association="Self.FK_tbl_Prescription_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Prescription" EntitySet="tbl_Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Staff_tbl_SubCity" Association="Self.FK_tbl_Staff_tbl_SubCity">
+            <End Role="tbl_SubCity" EntitySet="tbl_SubCity" />
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Visit_tbl_Patient" Association="Self.FK_tbl_Visit_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Woreda_tbl_SubCity" Association="Self.FK_tbl_Woreda_tbl_SubCity">
+            <End Role="tbl_SubCity" EntitySet="tbl_SubCity" />
+            <End Role="tbl_Woreda" EntitySet="tbl_Woreda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hawic_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_Appointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="AppointmentDate" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_Appointment_tbl_Staff" FromRole="tbl_Appointment" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Staff1" Relationship="Self.FK_tbl_Appointment_tbl_StaffPatient" FromRole="tbl_Appointment" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_ImagingOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="ImagingID" Type="Int32" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="ImageResult" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="OrderStatus" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_OrderStatus" Relationship="Self.FK_tbl_ImagingOrder_tbl_OrderStatus" FromRole="tbl_ImagingOrder" ToRole="tbl_OrderStatus" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_ImagingOrder_tbl_Patient" FromRole="tbl_ImagingOrder" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_ImagingOrder_tbl_StaffDoctor" FromRole="tbl_ImagingOrder" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Staff1" Relationship="Self.FK_tbl_ImagingOrder_tbl_StaffImaging" FromRole="tbl_ImagingOrder" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_InjectionOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="NurseID" Type="Int32" />
+          <Property Name="Description" Type="Int32" />
+          <Property Name="OrderStatus" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_OrderStatus" Relationship="Self.FK_tbl_InjectionOrder_tbl_OrderStatus" FromRole="tbl_InjectionOrder" ToRole="tbl_OrderStatus" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_InjectionOrder_tbl_Patient" FromRole="tbl_InjectionOrder" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_InjectionOrder_tbl_StaffDoctor" FromRole="tbl_InjectionOrder" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Staff1" Relationship="Self.FK_tbl_InjectionOrder_tbl_StaffNurse" FromRole="tbl_InjectionOrder" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_LaboratoryOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="LaboratoryID" Type="Int32" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="OrderStatus" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_OrderStatus" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_OrderStatus" FromRole="tbl_LaboratoryOrder" ToRole="tbl_OrderStatus" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_Patient" FromRole="tbl_LaboratoryOrder" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_StaffDoctor" FromRole="tbl_LaboratoryOrder" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Staff1" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_StaffLaboratory" FromRole="tbl_LaboratoryOrder" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_ImagingOrder" Relationship="Self.FK_tbl_ImagingOrder_tbl_OrderStatus" FromRole="tbl_OrderStatus" ToRole="tbl_ImagingOrder" />
+          <NavigationProperty Name="tbl_InjectionOrder" Relationship="Self.FK_tbl_InjectionOrder_tbl_OrderStatus" FromRole="tbl_OrderStatus" ToRole="tbl_InjectionOrder" />
+          <NavigationProperty Name="tbl_LaboratoryOrder" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_OrderStatus" FromRole="tbl_OrderStatus" ToRole="tbl_LaboratoryOrder" />
+        </EntityType>
+        <EntityType Name="tbl_Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubCity" Type="Int32" />
+          <Property Name="Woreda" Type="Int32" />
+          <NavigationProperty Name="tbl_ImagingOrder" Relationship="Self.FK_tbl_ImagingOrder_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_ImagingOrder" />
+          <NavigationProperty Name="tbl_InjectionOrder" Relationship="Self.FK_tbl_InjectionOrder_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_InjectionOrder" />
+          <NavigationProperty Name="tbl_LaboratoryOrder" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_LaboratoryOrder" />
+          <NavigationProperty Name="tbl_PatientHistory" Relationship="Self.FK_tbl_PatientHistory_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_PatientHistory" />
+          <NavigationProperty Name="tbl_Prescription" Relationship="Self.FK_tbl_Prescription_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_Prescription" />
+          <NavigationProperty Name="tbl_Visit" Relationship="Self.FK_tbl_Visit_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_Visit" />
+        </EntityType>
+        <EntityType Name="tbl_PatientHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="VisitID" Type="Int32" />
+          <Property Name="DoctorComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_PatientHistory_tbl_Patient" FromRole="tbl_PatientHistory" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_PatientHistory_tbl_Staff" FromRole="tbl_PatientHistory" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Visit" Relationship="Self.FK_tbl_PatientHistory_tbl_Visit" FromRole="tbl_PatientHistory" ToRole="tbl_Visit" />
+          <NavigationProperty Name="tbl_PatientHistoryOrders" Relationship="Self.FK_tbl_PatientHistoryOrders_tbl_PatientHistory" FromRole="tbl_PatientHistory" ToRole="tbl_PatientHistoryOrders" />
+        </EntityType>
+        <EntityType Name="tbl_PatientHistoryOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientHistoryID" Type="Int32" />
+          <Property Name="LaboratoryOrderID" Type="Int32" />
+          <Property Name="ImagingOrderID" Type="Int32" />
+          <Property Name="InjectionOrderID" Type="Int32" />
+          <Property Name="PrescriptionOrderID" Type="Int32" />
+          <NavigationProperty Name="tbl_PatientHistory" Relationship="Self.FK_tbl_PatientHistoryOrders_tbl_PatientHistory" FromRole="tbl_PatientHistoryOrders" ToRole="tbl_PatientHistory" />
+        </EntityType>
+        <EntityType Name="tbl_Prescription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_Prescription_tbl_Patient" FromRole="tbl_Prescription" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_Prescription_tbl_StaffDoctor" FromRole="tbl_Prescription" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_Staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubCity" Type="Int32" />
+          <Property Name="Woreda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <Property Name="RegStatus" Type="Int32" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Appointment" Relationship="Self.FK_tbl_Appointment_tbl_Staff" FromRole="tbl_Staff" ToRole="tbl_Appointment" />
+          <NavigationProperty Name="tbl_Appointment1" Relationship="Self.FK_tbl_Appointment_tbl_StaffPatient" FromRole="tbl_Staff" ToRole="tbl_Appointment" />
+          <NavigationProperty Name="tbl_ImagingOrder" Relationship="Self.FK_tbl_ImagingOrder_tbl_StaffDoctor" FromRole="tbl_Staff" ToRole="tbl_ImagingOrder" />
+          <NavigationProperty Name="tbl_ImagingOrder1" Relationship="Self.FK_tbl_ImagingOrder_tbl_StaffImaging" FromRole="tbl_Staff" ToRole="tbl_ImagingOrder" />
+          <NavigationProperty Name="tbl_InjectionOrder" Relationship="Self.FK_tbl_InjectionOrder_tbl_StaffDoctor" FromRole="tbl_Staff" ToRole="tbl_InjectionOrder" />
+          <NavigationProperty Name="tbl_InjectionOrder1" Relationship="Self.FK_tbl_InjectionOrder_tbl_StaffNurse" FromRole="tbl_Staff" ToRole="tbl_InjectionOrder" />
+          <NavigationProperty Name="tbl_LaboratoryOrder" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_StaffDoctor" FromRole="tbl_Staff" ToRole="tbl_LaboratoryOrder" />
+          <NavigationProperty Name="tbl_LaboratoryOrder1" Relationship="Self.FK_tbl_LaboratoryOrder_tbl_StaffLaboratory" FromRole="tbl_Staff" ToRole="tbl_LaboratoryOrder" />
+          <NavigationProperty Name="tbl_PatientHistory" Relationship="Self.FK_tbl_PatientHistory_tbl_Staff" FromRole="tbl_Staff" ToRole="tbl_PatientHistory" />
+          <NavigationProperty Name="tbl_Prescription" Relationship="Self.FK_tbl_Prescription_tbl_StaffDoctor" FromRole="tbl_Staff" ToRole="tbl_Prescription" />
+          <NavigationProperty Name="tbl_SubCity" Relationship="Self.FK_tbl_Staff_tbl_SubCity" FromRole="tbl_Staff" ToRole="tbl_SubCity" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_SubCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK_tbl_Staff_tbl_SubCity" FromRole="tbl_SubCity" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Woreda" Relationship="Self.FK_tbl_Woreda_tbl_SubCity" FromRole="tbl_SubCity" ToRole="tbl_Woreda" />
+        </EntityType>
+        <EntityType Name="tbl_Visit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="VisitDate" Type="DateTime" Precision="3" />
+          <Property Name="VisitType" Type="Int32" />
+          <Property Name="VisitStatus" Type="Int32" />
+          <NavigationProperty Name="tbl_Patient" Relationship="Self.FK_tbl_Visit_tbl_Patient" FromRole="tbl_Visit" ToRole="tbl_Patient" />
+          <NavigationProperty Name="tbl_PatientHistory" Relationship="Self.FK_tbl_PatientHistory_tbl_Visit" FromRole="tbl_Visit" ToRole="tbl_PatientHistory" />
+        </EntityType>
+        <EntityType Name="tbl_Woreda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Woreda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SubCityID" Type="Int32" />
+          <NavigationProperty Name="tbl_SubCity" Relationship="Self.FK_tbl_Woreda_tbl_SubCity" FromRole="tbl_Woreda" ToRole="tbl_SubCity" />
+        </EntityType>
+        <Association Name="FK_tbl_Appointment_tbl_Staff">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Appointment">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Appointment_tbl_StaffPatient">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Appointment">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImagingOrder_tbl_StaffImaging">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_ImagingOrder" Type="Self.tbl_ImagingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_ImagingOrder">
+              <PropertyRef Name="ImagingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_InjectionOrder_tbl_StaffNurse">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_InjectionOrder" Type="Self.tbl_InjectionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_InjectionOrder">
+              <PropertyRef Name="NurseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_OrderStatus">
+          <End Role="tbl_OrderStatus" Type="Self.tbl_OrderStatus" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_LaboratoryOrder_tbl_StaffLaboratory">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_LaboratoryOrder" Type="Self.tbl_LaboratoryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_LaboratoryOrder">
+              <PropertyRef Name="LaboratoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Prescription_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_Prescription" Type="Self.tbl_Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Prescription">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Visit_tbl_Patient">
+          <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+          <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Visit">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Staff">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistory_tbl_Visit">
+          <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Visit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistory">
+              <PropertyRef Name="VisitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_PatientHistoryOrders_tbl_PatientHistory">
+          <End Role="tbl_PatientHistory" Type="Self.tbl_PatientHistory" Multiplicity="0..1" />
+          <End Role="tbl_PatientHistoryOrders" Type="Self.tbl_PatientHistoryOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PatientHistoryOrders">
+              <PropertyRef Name="PatientHistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Prescription_tbl_StaffDoctor">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Prescription" Type="Self.tbl_Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Prescription">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Staff_tbl_SubCity">
+          <End Role="tbl_SubCity" Type="Self.tbl_SubCity" Multiplicity="0..1" />
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SubCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Staff">
+              <PropertyRef Name="SubCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Woreda_tbl_SubCity">
+          <End Role="tbl_SubCity" Type="Self.tbl_SubCity" Multiplicity="0..1" />
+          <End Role="tbl_Woreda" Type="Self.tbl_Woreda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SubCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Woreda">
+              <PropertyRef Name="SubCityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hawic_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_Appointment" EntityType="Self.tbl_Appointment" />
+          <EntitySet Name="tbl_Department" EntityType="Self.tbl_Department" />
+          <EntitySet Name="tbl_ImagingOrder" EntityType="Self.tbl_ImagingOrder" />
+          <EntitySet Name="tbl_InjectionOrder" EntityType="Self.tbl_InjectionOrder" />
+          <EntitySet Name="tbl_LaboratoryOrder" EntityType="Self.tbl_LaboratoryOrder" />
+          <EntitySet Name="tbl_OrderStatus" EntityType="Self.tbl_OrderStatus" />
+          <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" />
+          <EntitySet Name="tbl_PatientHistory" EntityType="Self.tbl_PatientHistory" />
+          <EntitySet Name="tbl_PatientHistoryOrders" EntityType="Self.tbl_PatientHistoryOrders" />
+          <EntitySet Name="tbl_Prescription" EntityType="Self.tbl_Prescription" />
+          <EntitySet Name="tbl_Staff" EntityType="Self.tbl_Staff" />
+          <EntitySet Name="tbl_SubCity" EntityType="Self.tbl_SubCity" />
+          <EntitySet Name="tbl_Visit" EntityType="Self.tbl_Visit" />
+          <EntitySet Name="tbl_Woreda" EntityType="Self.tbl_Woreda" />
+          <AssociationSet Name="FK_tbl_Appointment_tbl_Staff" Association="Self.FK_tbl_Appointment_tbl_Staff">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Appointment_tbl_StaffPatient" Association="Self.FK_tbl_Appointment_tbl_StaffPatient">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_OrderStatus" Association="Self.FK_tbl_ImagingOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_Patient" Association="Self.FK_tbl_ImagingOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_StaffDoctor" Association="Self.FK_tbl_ImagingOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImagingOrder_tbl_StaffImaging" Association="Self.FK_tbl_ImagingOrder_tbl_StaffImaging">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_ImagingOrder" EntitySet="tbl_ImagingOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_OrderStatus" Association="Self.FK_tbl_InjectionOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_Patient" Association="Self.FK_tbl_InjectionOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_StaffDoctor" Association="Self.FK_tbl_InjectionOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_InjectionOrder_tbl_StaffNurse" Association="Self.FK_tbl_InjectionOrder_tbl_StaffNurse">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_InjectionOrder" EntitySet="tbl_InjectionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_OrderStatus" Association="Self.FK_tbl_LaboratoryOrder_tbl_OrderStatus">
+            <End Role="tbl_OrderStatus" EntitySet="tbl_OrderStatus" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_Patient" Association="Self.FK_tbl_LaboratoryOrder_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_StaffDoctor" Association="Self.FK_tbl_LaboratoryOrder_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_LaboratoryOrder_tbl_StaffLaboratory" Association="Self.FK_tbl_LaboratoryOrder_tbl_StaffLaboratory">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_LaboratoryOrder" EntitySet="tbl_LaboratoryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Patient" Association="Self.FK_tbl_PatientHistory_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Prescription_tbl_Patient" Association="Self.FK_tbl_Prescription_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_Prescription" EntitySet="tbl_Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Visit_tbl_Patient" Association="Self.FK_tbl_Visit_tbl_Patient">
+            <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+            <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Staff" Association="Self.FK_tbl_PatientHistory_tbl_Staff">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistory_tbl_Visit" Association="Self.FK_tbl_PatientHistory_tbl_Visit">
+            <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_PatientHistoryOrders_tbl_PatientHistory" Association="Self.FK_tbl_PatientHistoryOrders_tbl_PatientHistory">
+            <End Role="tbl_PatientHistory" EntitySet="tbl_PatientHistory" />
+            <End Role="tbl_PatientHistoryOrders" EntitySet="tbl_PatientHistoryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Prescription_tbl_StaffDoctor" Association="Self.FK_tbl_Prescription_tbl_StaffDoctor">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Prescription" EntitySet="tbl_Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Staff_tbl_SubCity" Association="Self.FK_tbl_Staff_tbl_SubCity">
+            <End Role="tbl_SubCity" EntitySet="tbl_SubCity" />
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Woreda_tbl_SubCity" Association="Self.FK_tbl_Woreda_tbl_SubCity">
+            <End Role="tbl_SubCity" EntitySet="tbl_SubCity" />
+            <End Role="tbl_Woreda" EntitySet="tbl_Woreda" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hawic_dbModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hawic_dbModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hawic_dbModelStoreContainer" CdmEntityContainer="hawic_dbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="hawic_dbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Appointment">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Appointment">
+              <MappingFragment StoreEntitySet="tbl_Appointment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Department">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Department">
+              <MappingFragment StoreEntitySet="tbl_Department">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ImagingOrder">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_ImagingOrder">
+              <MappingFragment StoreEntitySet="tbl_ImagingOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="ImagingID" ColumnName="ImagingID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ImageResult" ColumnName="ImageResult" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_InjectionOrder">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_InjectionOrder">
+              <MappingFragment StoreEntitySet="tbl_InjectionOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="NurseID" ColumnName="NurseID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_LaboratoryOrder">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_LaboratoryOrder">
+              <MappingFragment StoreEntitySet="tbl_LaboratoryOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="LaboratoryID" ColumnName="LaboratoryID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderStatus">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_OrderStatus">
+              <MappingFragment StoreEntitySet="tbl_OrderStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Patient">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Patient">
+              <MappingFragment StoreEntitySet="tbl_Patient">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="SubCity" ColumnName="SubCity" />
+                <ScalarProperty Name="Woreda" ColumnName="Woreda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PatientHistory">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_PatientHistory">
+              <MappingFragment StoreEntitySet="tbl_PatientHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="VisitID" ColumnName="VisitID" />
+                <ScalarProperty Name="DoctorComment" ColumnName="DoctorComment" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PatientHistoryOrders">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_PatientHistoryOrders">
+              <MappingFragment StoreEntitySet="tbl_PatientHistoryOrders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PatientHistoryID" ColumnName="PatientHistoryID" />
+                <ScalarProperty Name="LaboratoryOrderID" ColumnName="LaboratoryOrderID" />
+                <ScalarProperty Name="ImagingOrderID" ColumnName="ImagingOrderID" />
+                <ScalarProperty Name="InjectionOrderID" ColumnName="InjectionOrderID" />
+                <ScalarProperty Name="PrescriptionOrderID" ColumnName="PrescriptionOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Prescription">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Prescription">
+              <MappingFragment StoreEntitySet="tbl_Prescription">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Prescription" ColumnName="Prescription" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Staff">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Staff">
+              <MappingFragment StoreEntitySet="tbl_Staff">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="SubCity" ColumnName="SubCity" />
+                <ScalarProperty Name="Woreda" ColumnName="Woreda" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="RegStatus" ColumnName="RegStatus" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SubCity">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_SubCity">
+              <MappingFragment StoreEntitySet="tbl_SubCity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubCity" ColumnName="SubCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Visit">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Visit">
+              <MappingFragment StoreEntitySet="tbl_Visit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="VisitType" ColumnName="VisitType" />
+                <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Woreda">
+            <EntityTypeMapping TypeName="hawic_dbModel.tbl_Woreda">
+              <MappingFragment StoreEntitySet="tbl_Woreda">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Woreda" ColumnName="Woreda" />
+                <ScalarProperty Name="SubCityID" ColumnName="SubCityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hawic_dbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hawic_dbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hawic_dbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hawic_dbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="hawic_dbModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hawic_dbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="hawic_dbModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hawic_dbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hawic_dbModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
